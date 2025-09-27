@@ -25,6 +25,7 @@ dependencies {
 
 processResources {
     def compatible_forgemc_versions = "${gradle.ext.compatible_mc_versions}".replaceAll("\"", "").replaceAll("]", ",)")
+    def forgeLoaderValue = gradle.ext.has('forge_loader') ? gradle.ext.forge_loader : ""
 
     var expandProps = ['version'                      : mod_version,
                        'group'                        : project.group,
@@ -36,7 +37,7 @@ processResources {
                        'mod_id'                       : mod_id,
                        'license'                      : license,
                        'description'                  : project.description,
-                       'forge_loader'                 : gradle.ext.forge_loader,
+                       'forge_loader'                 : forgeLoaderValue,
                        'credits'                      : credits,
                        'java_version'                 : gradle.ext.java_version]
 
