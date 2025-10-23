@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Slot.class)
 
 public abstract class SlotMixin {
+    #if MC_VER==MC_1_20_1
+
     @Shadow @Final public Container container;
 
     @Shadow @Final private int slot;
@@ -56,4 +58,5 @@ public abstract class SlotMixin {
     private void setByPlayerInject(ItemStack stack, CallbackInfo ci){
         ModCoreItemSplitBugFix.fixBug(stack);
     }
+    #endif
 }

@@ -11,3 +11,7 @@ unimined.minecraft {
 }
 runClient.javaLauncher = null
 runServer.javaLauncher = null
+
+dependencies {
+
+}
