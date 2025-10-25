@@ -2,16 +2,44 @@ plugins {
     id 'minecraft'
 }
 
+configurations {
+    modRuntimeOnly
+    runtimeOnly.extendsFrom modRuntimeOnly
+
+    modCompileOnly
+    compileOnly.extendsFrom modCompileOnly
+}
+
 unimined.minecraft {
     forge {
         loader gradle.ext.forge_loader
         useToolchains = false // Disable toolchains so modern java can be used
         mixinConfig("${mod_id}.mixins.json") // <-- Mixin configuration, can be comma-separated for multiple
     }
+
+    mods {
+        remap(configurations.modRuntimeOnly) {
+            catchAWNamespaceAssertion()
+        }
+
+        modImplementation {
+            catchAWNamespaceAssertion()
+        }
+    }
 }
 runClient.javaLauncher = null
 runServer.javaLauncher = null
 
-dependencies {
+def mcVersion = hasProperty("mc_ver") ? mc_ver : ""
 
+dependencies {
+    switch(mcVersion) {
+        case "1.20.1":
+            modRuntimeOnly("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
+            modRuntimeOnly("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
+            modRuntimeOnly ".:urushi-1.20.1-6.6.1"
+            break
+        default:
+            println "No specific libs for version: $mcVersion"
+    }
 }

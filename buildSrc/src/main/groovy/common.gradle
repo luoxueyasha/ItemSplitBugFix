@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'eclipse'
+    id 'idea'
     id 'maven-publish'
     id 'xyz.wagyourtail.manifold'
     id 'xyz.wagyourtail.jvmdowngrader'
@@ -16,6 +18,7 @@ manifold {
 
 repositories {
     mavenCentral()
+    maven { url "https://maven.blamejared.com"} // @debug
 }
 
 dependencies {

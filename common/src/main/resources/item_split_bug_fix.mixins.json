@@ -6,5 +6,8 @@
   "mixins": [
     "SlotMixin",
     "ItemStackMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
