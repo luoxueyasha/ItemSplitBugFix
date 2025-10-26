@@ -1,0 +1,17 @@
+1.5.0
+- Port to universal-mod-template, changes toolchain
+- Supports 1.21.1 Neoforge & 1.19.2 Forge from now on
+- Bugfix:
+    - changes on blacklist config could be lost
+
+1.4.0
+- Remove the tooltip warning
+- Bugfix:
+    - Null container could cause NPE
+
+1.3.0
+- Adds the blacklist
+- Disables most conflicting items
+
+1.0.0 ~ 1.2.0
+- Init versions

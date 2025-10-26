@@ -8,5 +8,4 @@ unimined.minecraft {
     }
     defaultRemapJar = false
     runs.off = true
-
 }

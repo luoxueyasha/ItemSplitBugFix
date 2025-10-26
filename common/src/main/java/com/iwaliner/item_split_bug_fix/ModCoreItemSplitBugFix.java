@@ -22,12 +22,10 @@ public class ModCoreItemSplitBugFix{
     }
 
     public static void fixBug(ItemStack stack) {
-//        if (stack == null || stack.isEmpty()) return;
-//        if (ModCoreItemSplitBugFix.isSplitItemStack(stack)) {
-//            //stack.setTag(null); // @debug
-//            return;
-//        }
-        return;
+        if (stack == null || stack.isEmpty()) return;
+        if (ModCoreItemSplitBugFix.isSplitItemStack(stack)) {
+            stack.setTag(null);
+        }
     }
     ////    @SubscribeEvent
 ////    public void ItemTooltipEvent(ItemTooltipEvent event) {

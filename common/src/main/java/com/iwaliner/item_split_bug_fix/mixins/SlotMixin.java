@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Slot.class)
 
 public abstract class SlotMixin {
-    #if MC_VER==MC_1_20_1
+#if MC_VER==MC_1_21_1 || MC_VER==MC_1_20_1 || MC_VER==MC_1_19_2
 
     @Shadow @Final public Container container;
 
@@ -54,9 +54,12 @@ public abstract class SlotMixin {
     private void mayPlaceInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
         ModCoreItemSplitBugFix.fixBug(stack);
     }
+#endif
+
+#if MC_VER == MC_1_21_1 || MC_VER == MC_1_20_1
     @Inject(method = "setByPlayer",at = @At("HEAD"), cancellable = true)
     private void setByPlayerInject(ItemStack stack, CallbackInfo ci){
         ModCoreItemSplitBugFix.fixBug(stack);
     }
-    #endif
+#endif
 }

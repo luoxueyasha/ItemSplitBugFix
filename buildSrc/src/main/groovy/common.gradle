@@ -18,7 +18,7 @@ manifold {
 
 repositories {
     mavenCentral()
-    maven { url "https://maven.blamejared.com"} // @debug
+    maven { url "https://maven.blamejared.com"}
 }
 
 dependencies {

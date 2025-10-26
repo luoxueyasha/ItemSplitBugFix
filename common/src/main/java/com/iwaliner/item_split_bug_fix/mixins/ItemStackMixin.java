@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 
 public abstract class ItemStackMixin {
-    #if MC_VER==MC_1_20_1
+
 
     @Inject(method = "split",at = @At("HEAD"), cancellable = true)
     private void splitInject(CallbackInfoReturnable<ItemStack> cir){
@@ -35,11 +35,6 @@ public abstract class ItemStackMixin {
         ModCoreItemSplitBugFix.fixBug(stack1);
         ModCoreItemSplitBugFix.fixBug(stack2);
     }
-    @Inject(method = "isSameItem",at = @At("HEAD"), cancellable = true)
-    private static void isSameItemInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
-        ModCoreItemSplitBugFix.fixBug(stack1);
-        ModCoreItemSplitBugFix.fixBug(stack2);
-    }
     @Inject(method = "getCount",at = @At("HEAD"), cancellable = true)
     private void getCountInject(CallbackInfoReturnable<Integer> cir){
         ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
@@ -48,6 +43,26 @@ public abstract class ItemStackMixin {
     private void setCountInject(int p_41765_, CallbackInfo ci){
         ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
     }
-    #endif
+
+
+#if MC_VER == MC_1_21_1 || MC_VER==MC_1_20_1
+    @Inject(method = "isSameItem", at = @At("HEAD"), cancellable = true)
+#elif MC_VER == MC_1_19_2
+    @Inject(method = "isSame", at = @At("HEAD"), cancellable = true)
+#endif
+    private static void isSameInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
+        ModCoreItemSplitBugFix.fixBug(stack1);
+        ModCoreItemSplitBugFix.fixBug(stack2);
+    }
+
+    // @debug. this may cause issues
+//#if MC_VER == MC_1_19_2
+//    @Inject(method = "isSameIgnoreDurability",at = @At("HEAD"), cancellable = true)
+//    private static void isSameIgnoreDurabilityInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
+//        ModCoreItemSplitBugFix.fixBug(stack1);
+//        ModCoreItemSplitBugFix.fixBug(stack2);
+//    }
+//#endif
+
 
 }

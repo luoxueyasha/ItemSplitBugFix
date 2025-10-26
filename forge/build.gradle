@@ -3,7 +3,7 @@ plugins {
 }
 
 repositories {
-    flatDir { // @debug
+    flatDir {
         dirs '/libs/1.20.1', '/custom-mods/1.20.1'
     }
 }
