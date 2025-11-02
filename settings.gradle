@@ -35,7 +35,8 @@ pluginManagement {
 
 def loadVersionProperties() {
     // Get all the files in "versionProperties", as we're getting the file names, we should remove the ".properties" at the end to get the versions
-    def mcVers = fileTree("versionProperties").files.collect { it.name.replaceAll("\\.properties", "") }
+    def mcVers = fileTree("versionProperties").files.findAll { it.name =~ /^\d.*\.properties$/ }
+        .collect { it.name.replaceAll("\\.properties", "") }
         .sort { a, b -> // Sort it so it always goes from oldest to newest using semantic versioning
             def aParts = a.tokenize('.'); def bParts = b.tokenize('.')
             for (int i = 0; i < Math.min(aParts.size(), bParts.size()); i++) {

@@ -16,6 +16,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+#if MC_VER==MC_1_21_1
+import net.minecraft.core.component.*;
+#endif
+
 @Mixin(Slot.class)
 
 public abstract class SlotMixin {
@@ -29,8 +33,13 @@ public abstract class SlotMixin {
     private void getItemInject(CallbackInfoReturnable<ItemStack> cir){
         if(this.container!=null) {
             ItemStack stack = container.getItem(this.slot);
+            if (stack.isEmpty()) return;
             if (ModCoreItemSplitBugFix.isSplitItemStack(stack)) {
-                stack.setTag(null);
+#if MC_VER == MC_1_21_1
+                stack.remove(DataComponents.CUSTOM_DATA); // @debug, this may trigger problems in different environments. Needs more bug reports to see if this works correctly
+#else
+            stack.setTag(null);
+#endif
                 cir.setReturnValue(stack);
             }
 
