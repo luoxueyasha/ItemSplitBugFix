@@ -14,6 +14,8 @@ out/
 !**/src/test/**/out/
 
 ### Eclipse ###
+*.launch
+.metadata
 .apt_generated
 .classpath
 .factorypath
@@ -21,6 +23,8 @@ out/
 .settings
 .springBeans
 .sts4-cache
+eclipse
+run
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
@@ -46,3 +50,6 @@ run/
 **/logs/
 **/crash-reports/
 **/run/
+
+# Files from Forge MDK
+forge*changelog.txt
