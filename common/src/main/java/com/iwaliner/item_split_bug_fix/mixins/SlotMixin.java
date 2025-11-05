@@ -1,6 +1,6 @@
 package com.iwaliner.item_split_bug_fix.mixins;
 
-import com.iwaliner.item_split_bug_fix.ModCoreItemSplitBugFix;
+import com.iwaliner.item_split_bug_fix.ModPlatformHandler;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
@@ -33,35 +33,28 @@ public abstract class SlotMixin {
     private void getItemInject(CallbackInfoReturnable<ItemStack> cir){
         if(this.container!=null) {
             ItemStack stack = container.getItem(this.slot);
-            if (stack.isEmpty()) return;
-            if (ModCoreItemSplitBugFix.isSplitItemStack(stack)) {
-#if MC_VER == MC_1_21_1
-                stack.remove(DataComponents.CUSTOM_DATA); // @debug, this may trigger problems in different environments. Needs more bug reports to see if this works correctly
-#else
-            stack.setTag(null);
-#endif
+            if(ModPlatformHandler.fixBug(stack)){
                 cir.setReturnValue(stack);
             }
-
         }
     }
     @Inject(method = "set",at = @At("HEAD"), cancellable = true)
     private void setInject(ItemStack stack, CallbackInfo ci){
-        ModCoreItemSplitBugFix.fixBug(stack);
+        ModPlatformHandler.fixBug(stack);
     }
 
     @Inject(method = "onQuickCraft",at = @At("HEAD"), cancellable = true)
     private void onQuickCraftInject(ItemStack stack1, ItemStack stack2,CallbackInfo ci){
-        ModCoreItemSplitBugFix.fixBug(stack1);
-        ModCoreItemSplitBugFix.fixBug(stack2);
+        ModPlatformHandler.fixBug(stack1);
+        ModPlatformHandler.fixBug(stack2);
     }
     @Inject(method = "onTake",at = @At("HEAD"), cancellable = true)
     private void onTakeInject(Player player, ItemStack stack, CallbackInfo ci){
-        ModCoreItemSplitBugFix.fixBug(stack);
+        ModPlatformHandler.fixBug(stack);
     }
     @Inject(method = "mayPlace",at = @At("HEAD"), cancellable = true)
     private void mayPlaceInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
-        ModCoreItemSplitBugFix.fixBug(stack);
+        ModPlatformHandler.fixBug(stack);
     }
 #endif
 

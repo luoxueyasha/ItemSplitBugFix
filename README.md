@@ -39,7 +39,7 @@ Depends on if the project toolchain supports these versions. Currently, we will 
 ### and... what about Fabric and NeoForge?
 Fabric port is not on schedule yet.  
 For NeoForge, as it aims 1.21+, which item NBT API changes a lot; the split bug *should* not occur, theoretically.  
-However the deprecated code and toolchain works fine, so we just leave it here, comment them out, for someday in the future.
+However the toolchain works fine, and the code looks good (need some adjust though); so we just leave them here, comment them out, ready for someday in the future.
 
 ## Building the Project
 

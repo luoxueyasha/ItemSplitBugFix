@@ -1,6 +1,5 @@
 package com.iwaliner.item_split_bug_fix.mixins;
 
-import com.iwaliner.item_split_bug_fix.ModCoreItemSplitBugFix;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -16,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.iwaliner.item_split_bug_fix.ModPlatformHandler;
 
 @Mixin(ItemStack.class)
 
@@ -24,24 +24,24 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "split",at = @At("HEAD"), cancellable = true)
     private void splitInject(CallbackInfoReturnable<ItemStack> cir){
-        ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
+        ModPlatformHandler.fixBug(((ItemStack) (Object)this));
     }
     @Inject(method = "copy",at = @At("HEAD"), cancellable = true)
     private void copyInject(CallbackInfoReturnable<ItemStack> cir){
-        ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
+        ModPlatformHandler.fixBug(((ItemStack) (Object)this));
     }
     @Inject(method = "isSameItemSameTags",at = @At("HEAD"), cancellable = true)
     private static void isSameItemSameTagsInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
-        ModCoreItemSplitBugFix.fixBug(stack1);
-        ModCoreItemSplitBugFix.fixBug(stack2);
+        ModPlatformHandler.fixBug(stack1);
+        ModPlatformHandler.fixBug(stack2);
     }
     @Inject(method = "getCount",at = @At("HEAD"), cancellable = true)
     private void getCountInject(CallbackInfoReturnable<Integer> cir){
-        ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
+        ModPlatformHandler.fixBug(((ItemStack) (Object)this));
     }
     @Inject(method = "setCount",at = @At("HEAD"), cancellable = true)
     private void setCountInject(int p_41765_, CallbackInfo ci){
-        ModCoreItemSplitBugFix.fixBug(((ItemStack) (Object)this));
+        ModPlatformHandler.fixBug(((ItemStack) (Object)this));
     }
 
 
@@ -51,16 +51,16 @@ public abstract class ItemStackMixin {
     @Inject(method = "isSame", at = @At("HEAD"), cancellable = true)
 #endif
     private static void isSameInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
-        ModCoreItemSplitBugFix.fixBug(stack1);
-        ModCoreItemSplitBugFix.fixBug(stack2);
+        ModPlatformHandler.fixBug(stack1);
+        ModPlatformHandler.fixBug(stack2);
     }
 
     // @debug. this may cause issues
 //#if MC_VER == MC_1_19_2
 //    @Inject(method = "isSameIgnoreDurability",at = @At("HEAD"), cancellable = true)
 //    private static void isSameIgnoreDurabilityInject(ItemStack stack1, ItemStack stack2, CallbackInfoReturnable<Boolean> cir){
-//        ModCoreItemSplitBugFix.fixBug(stack1);
-//        ModCoreItemSplitBugFix.fixBug(stack2);
+//        ModPlatformHandler.fixBug(stack1);
+//        ModPlatformHandler.fixBug(stack2);
 //    }
 //#endif
 
