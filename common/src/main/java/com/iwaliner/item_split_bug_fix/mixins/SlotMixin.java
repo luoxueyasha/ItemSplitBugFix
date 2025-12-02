@@ -1,5 +1,6 @@
 package com.iwaliner.item_split_bug_fix.mixins;
 
+import com.iwaliner.item_split_bug_fix.ModCoreItemSplitBugFix;
 import com.iwaliner.item_split_bug_fix.ModPlatformHandler;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

@@ -7,12 +7,13 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import java.util.Arrays;
 import java.util.List;
 
+// Configuration class for Forge
 public class ConfigItemSplitBugFixForge {
     public static ConfigItemSplitBugFixForge CONFIG;
     public static ForgeConfigSpec CONFIG_SPEC;
 
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> BLACKLIST_ITEMS;
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> REMOVE_NBT_TAGS;
+    public static ForgeConfigSpec.ConfigValue<List<? extends String>> REMOVE_TAG_LIST;
 
     static {
         Pair<ConfigItemSplitBugFixForge, ForgeConfigSpec> pair =
@@ -48,14 +49,16 @@ public class ConfigItemSplitBugFixForge {
 
         builder.pop();
 
-        builder.push("nbt_cleanup_settings"); // @debug, todo
+        builder.push("nbt_cleanup_settings");
 
-        REMOVE_NBT_TAGS = builder
+        REMOVE_TAG_LIST = builder
             .comment(" A list of NBT tags that will be explicitly removed from an ItemStack's tag.",
-                " Note: All tags will be cleaned up if the ItemStack's tag is empty after other bug fixes.",
-                " Use this list to remove specific unwanted tags.",
-                " Example: [\"item_stack_owner\", \"custom_tag\"]")
-            .defineList("remove_tags", Arrays.asList("my_tag_to_remove_12345"),
+                " Use this list to remove specific unwanted tags. Supports wildcard '*'.",
+                " Example: [\"item_stack_owner\", \"custom_tag*\", \"StoredEnchantments\"]")
+            .defineList("remove_tags", Arrays.asList(
+                    "my_tag_to_remove_12345",
+                    "another_tag*_to_remove_67890"
+                ),
                 entry -> true
             );
 

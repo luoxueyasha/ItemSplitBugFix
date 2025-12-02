@@ -1,7 +1,9 @@
 package com.iwaliner.item_split_bug_fix;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
+// platform handler to delegate platform-specific implementations
 public class ModPlatformHandler {
     public static IPlatformHelper HELPER = null;
 
@@ -20,5 +22,6 @@ public class ModPlatformHandler {
 
         return ModCoreItemSplitBugFix.fixBug(stack);
     }
+
 
 }
