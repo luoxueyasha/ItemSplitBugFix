@@ -28,12 +28,7 @@ public class ModCoreItemSplitBugFix{
 #if MC_VER == MC_1_21_1
         return stack.get(DataComponents.CUSTOM_DATA) != null && Objects.equals(stack.get(DataComponents.CUSTOM_DATA), CustomData.EMPTY);
 #else
-
-        CompoundTag tag = stack.getTag();
-        if(tag == null){
-            return false;
-        }
-        return tag.isEmpty();
+        return stack.getTag() != null && stack.getTag().isEmpty();
 #endif
     }
 

@@ -33,7 +33,7 @@ public class ModCoreItemSplitBugFixForge{
         if (stack == null || stack.isEmpty() || blacklistPattern.isEmpty()) {
             return true;
         }
-        prepareBlacklist();
+        prepareConfig();
         Item item = stack.getItem();
         if(blacklistCache.contains(item)){
             return true;
