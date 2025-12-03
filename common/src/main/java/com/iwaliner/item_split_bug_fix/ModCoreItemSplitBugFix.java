@@ -23,9 +23,6 @@ public class ModCoreItemSplitBugFix{
     public static Set<Item> blacklistCache = new HashSet<>();
     public static Set<Item> blacklistCheckedItemsCache = new HashSet<>();
     public static IPlatformHelper HELPER = null;
-#if MC_VER != MC_1_21_1
-    public static List<Pattern> removeTagListPattern = new ArrayList<>();
-#endif
 
     public static boolean isSplitItemStack(ItemStack stack) {
 #if MC_VER == MC_1_21_1
@@ -36,31 +33,22 @@ public class ModCoreItemSplitBugFix{
         if(tag == null){
             return false;
         }
-        if(tag.isEmpty()){
-            return true;
-        }
-
         return tag.isEmpty();
 #endif
     }
 
     public static boolean fixBug(ItemStack stack){
-        return fixBug(stack, null);
-    }
-
-    public static boolean fixBug(ItemStack stack, CompoundTag newtag){
         if (stack == null || stack.isEmpty()) return false;
         if (ModCoreItemSplitBugFix.isSplitItemStack(stack)) {
 #if MC_VER == MC_1_21_1
             stack.remove(DataComponents.CUSTOM_DATA); // @debug, this may trigger problems in different environments. Needs more bug reports to see if this works correctly
 #else
-            stack.setTag(newtag);
+            stack.setTag(null);
 #endif
             return true;
         }
         return false;
     }
-
 
     ////    @SubscribeEvent
 ////    public void ItemTooltipEvent(ItemTooltipEvent event) {

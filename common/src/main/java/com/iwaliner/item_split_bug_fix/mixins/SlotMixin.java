@@ -62,7 +62,7 @@ public abstract class SlotMixin {
 #if MC_VER == MC_1_21_1 || MC_VER == MC_1_20_1
     @Inject(method = "setByPlayer",at = @At("HEAD"), cancellable = true)
     private void setByPlayerInject(ItemStack stack, CallbackInfo ci){
-        ModCoreItemSplitBugFix.fixBug(stack);
+        ModPlatformHandler.fixBug(stack);
     }
 #endif
 }
